@@ -26,8 +26,8 @@ function main() {
   // By Daedelus: https://www.shadertoy.com/user/Daedelus
   // license: Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
   #define TIMESCALE 0.25 
-  #define TILES 8
-  #define COLOR 0.7, 1.6, 2.8
+  #define TILES 4
+  #define COLOR 0.1, 1.8, 2.8
 
   void mainImage( out vec4 fragColor, in vec2 fragCoord )
   {
@@ -55,7 +55,8 @@ function main() {
     varying vec2 vUv;
     void main() {
       vUv = uv;
-      gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+      float zoom = 2.3;
+      gl_Position = projectionMatrix * modelViewMatrix * vec4( position, zoom );
     }
   `;
 
@@ -78,15 +79,11 @@ function main() {
   function makeInstance(geometry, x) {
     const cube = new THREE.Mesh(geometry, material);
     scene.add(cube);
-
     cube.position.x = x;
-
     return cube;
   }
 
-  const cubes = [
-    makeInstance(geometry,  0),
-  ];
+  const cubes = [ makeInstance(geometry,  0), ];
 
   function resizeRendererToDisplaySize(renderer) {
     const canvas = renderer.domElement;
@@ -113,13 +110,11 @@ function main() {
       const rot_x = Math.sin(time)/3;
       const rot_y = (time * speed)/2;
       cube.rotation.x = rot_x;
-      cube.rotation.y = rot_y;
+      cube.rotation.y = rot_x;
     });
 
     uniforms.iTime.value = time;
-
     renderer.render(scene, camera);
-
     requestAnimationFrame(render);
   }
 
