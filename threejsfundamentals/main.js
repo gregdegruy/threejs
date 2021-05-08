@@ -86,8 +86,6 @@ function main() {
 
   const cubes = [
     makeInstance(geometry,  0),
-    makeInstance(geometry, -2),
-    makeInstance(geometry,  2),
   ];
 
   function resizeRendererToDisplaySize(renderer) {
@@ -112,9 +110,10 @@ function main() {
 
     cubes.forEach((cube, ndx) => {
       const speed = 1 + ndx * .1;
-      const rot = time * speed;
-      cube.rotation.x = rot;
-      cube.rotation.y = rot;
+      const rot_x = Math.sin(time)/3;
+      const rot_y = (time * speed)/2;
+      cube.rotation.x = rot_x;
+      cube.rotation.y = rot_y;
     });
 
     uniforms.iTime.value = time;
