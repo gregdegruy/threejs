@@ -16,6 +16,4 @@ change color of surface fragment shader
 
 sin allows you change values when constrained by zero and 1
 
-## Section
-
-ポケットモンスタールビとポケットモンスターサファイア。
+![Blue spinny cube GIF](img/demo.gif?raw=true)
