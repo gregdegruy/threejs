@@ -25,8 +25,8 @@ function main() {
 
   // By Daedelus: https://www.shadertoy.com/user/Daedelus
   // license: Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
-  #define TIMESCALE 0.25 
-  #define TILES 4
+  #define TIMESCALE 0.1
+  #define TILES 5
   #define COLOR 0.1, 1.8, 2.8
 
   void mainImage( out vec4 fragColor, in vec2 fragCoord )
@@ -36,11 +36,10 @@ function main() {
     
     vec4 noise = texture2D(iChannel0, floor(uv * float(TILES)) / float(TILES));
     float p = 1.0 - mod(noise.r + noise.g + noise.b + iTime * float(TIMESCALE), 1.0);
-    p = min(max(p * 3.0 - 1.8, 0.1), 2.0);
+    p = max(p * 3.0 - 1.8, 0.1);
     
     vec2 r = mod(uv * float(TILES), 1.0);
     r = vec2(pow(r.x - 0.3, 1.0), pow(r.y - 0.3, 1.0));
-    p *= 1.0 - pow(min(0.1, 0.1 * dot(r, r)), 0.1);
     
     fragColor = vec4(COLOR, 1.0) * p;
   }
@@ -107,10 +106,10 @@ function main() {
 
     cubes.forEach((cube, ndx) => {
       const speed = 1 + ndx * .1;
-      const rot_x = Math.sin(time)/3;
+      const rot_x = 2*(Math.sin(time)/3);
       const rot_y = (time * speed)/2;
       cube.rotation.x = rot_x;
-      cube.rotation.y = rot_x;
+      cube.rotation.y = rot_y;
     });
 
     uniforms.iTime.value = time;

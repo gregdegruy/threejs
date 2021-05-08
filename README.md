@@ -9,6 +9,12 @@
 | :------------------------ | :--------------------- | :---------------------- | :---------------------- | :---------------------- | :---------------------- |
 | This Pokémon can change its cells, taking different forms based on the temperature and humidity. | It understands human speech and is highly intelligent. It is a tender Pokémon that dislikes fighting. | Said to be the embodiment of north winds, it can instantly purify filthy, murky water. | It was formed by uniting 108 spirits. It has been bound to the Odd Keystone to keep it from doing any mischief. | If you are enchanted by its smooth, dance-like kicks, you may get a closer experience with one than you'd like. | If its rage peaks, it becomes so hot that anything that touches it will instantly go up in flames.
 
+u(x direction) v(y direction) are used when unwrap geometry
+the shared can be used to displace the points
+changes 3d position of surface using vertex shader
+change color of surface fragment shader
+
+sin allows you change values when constrained by zero and 1
 
 ## Section
 
