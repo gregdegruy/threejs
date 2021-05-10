@@ -9,22 +9,29 @@ const camBoundaryFar = 1000;
 const camera = new THREE.PerspectiveCamera(fov, aspectRatio, camBoundaryNear, camBoundaryFar);
 const renderer = new THREE.WebGLRenderer();
 
+renderer.setSize(window.innerWidth, window.innerHeight);
+
+document.body.appendChild(renderer.domElement);
+
 const sizes = {
   width: window.innerWidth,
   height: window.innerHeight
-};
+}
+
 window.addEventListener('resize', () =>
 {
+  // Update sizes
   sizes.width = window.innerWidth
   sizes.height = window.innerHeight
+
+  // Update camera
   camera.aspect = sizes.width / sizes.height
   camera.updateProjectionMatrix()
+
+  // Update renderer
   renderer.setSize(sizes.width, sizes.height)
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-});
-
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
+})
 
 const light = new THREE.DirectionalLight(0xffffff, 1.0);
 light.position.set(100, 100, 100);
@@ -33,18 +40,16 @@ const light2 = new THREE.DirectionalLight(0xffffff, 1.0);
 light2.position.set(-100, 100, -100);
 scene.add(light2);
 
-const geoemtry = new THREE.CubeGeometry(1, 1, 1);
 const material = new THREE.MeshBasicMaterial({
-  color: 0x00aaff,
+  color: 0xaaaaaa,
   wireframe: true,
 });
 
+const box = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), material);
+scene.add(box);
 
-const cube = new THREE.Mesh(geoemtry, material);
-scene.add(cube);
-
-cube.position.x = 0.5;
-cube.rotation.y = 0.5;
+box.position.x = 0.5;
+box.rotation.y = 0.5;
 
 camera.position.x = 5;
 camera.position.y = 5;
@@ -59,8 +64,8 @@ function animate(): void {
 
 function render(): void {
   const timer = 0.002 * Date.now();
-  cube.rotation.x += 0.01
-  cube.rotation.y += 0.01
+  box.position.y = 0.5 + 0.5 * Math.sin(timer);
+  box.rotation.x += 0.1;
   renderer.render(scene, camera);
 }
 
