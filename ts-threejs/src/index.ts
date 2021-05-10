@@ -1,5 +1,6 @@
 import './style.css';
 import * as THREE from 'three';
+import { OrbitControls } from 'three';
 
 const scene = new THREE.Scene();
 const fov = 75;
@@ -16,22 +17,18 @@ document.body.appendChild(renderer.domElement);
 const sizes = {
   width: window.innerWidth,
   height: window.innerHeight
-}
+};
 
-window.addEventListener('resize', () =>
-{
-  // Update sizes
+window.addEventListener('resize', () => {
   sizes.width = window.innerWidth
   sizes.height = window.innerHeight
 
-  // Update camera
   camera.aspect = sizes.width / sizes.height
   camera.updateProjectionMatrix()
 
-  // Update renderer
   renderer.setSize(sizes.width, sizes.height)
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-})
+});
 
 const light = new THREE.DirectionalLight(0xffffff, 1.0);
 light.position.set(100, 100, 100);
@@ -41,12 +38,14 @@ light2.position.set(-100, 100, -100);
 scene.add(light2);
 
 const material = new THREE.MeshBasicMaterial({
-  color: 0xaaaaaa,
-  wireframe: true,
+  color: 0x00aaff,
+  wireframe: true
 });
 
 const box = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), material);
 scene.add(box);
+
+
 
 box.position.x = 0.5;
 box.rotation.y = 0.5;
@@ -64,8 +63,8 @@ function animate(): void {
 
 function render(): void {
   const timer = 0.002 * Date.now();
-  box.position.y = 0.5 + 0.5 * Math.sin(timer);
-  box.rotation.x += 0.1;
+  box.position.y = 0.005;
+  box.rotation.x += 0.001;
   renderer.render(scene, camera);
 }
 
