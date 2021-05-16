@@ -3,11 +3,9 @@ import * as THREE from 'three'
 
 const scene = new THREE.Scene()
 const geometry = new THREE.BoxGeometry(1,1,1)
-const material = new THREE.MeshBasicMaterial({color: 0x00aaff})
-const cube = new THREE.Mesh(geometry, material)
-cube.position.set(-2, -1, -0.5)
-// cube.position.normalize()
-console.log("Cube len set to 1 with normalization: " + cube.position.length())
+const blueMaterial = new THREE.MeshBasicMaterial({ color: 0x00aaff})
+const blueCube = new THREE.Mesh(geometry, blueMaterial)
+blueCube.position.set(-2, -1, -0.5)
 
 const fov = 75
 const screen = {
@@ -16,15 +14,33 @@ const screen = {
 }
 const aspectRatio = screen.width / screen.height
 const camera = new THREE.PerspectiveCamera(fov, aspectRatio)
-camera.position.set(0.5, 0.5, 5)
-console.log("Distance between camera and cube: " + cube.position.distanceTo(camera.position))
+camera.position.set(0.5, 0.5, 3.5)
 
 const axesLength = 4
 const axesHelper = new THREE.AxesHelper(axesLength);
+// camera.lookAt(axesHelper.position)
 
-scene.add(cube)
+const group = new THREE.Group()
+const redCube = new THREE.Mesh(
+    geometry,
+    new THREE.MeshBasicMaterial({ color: 0xff6961 })
+)
+redCube.position.z = -3
+const greenCube = new THREE.Mesh(
+    geometry,
+    new THREE.MeshBasicMaterial({ color: 0x77dd77 })
+)
+greenCube.scale.set(0.7, 0.7, 0.7)
+greenCube.position.z = 1
+group.add(redCube)
+group.add(greenCube)
+group.position.x = 1.5
+group.rotation.z = 0.4
+
+scene.add(blueCube)
 scene.add(camera)
 scene.add(axesHelper)
+scene.add(group)
 const canvas = document.getElementById("universe-canvas");
 const renderer = new THREE.WebGLRenderer({
     canvas: canvas
