@@ -5,11 +5,11 @@ const cube = new THREE.Mesh(geometry, material)
 scene.add(cube)
 
 const fov = 75
-const sizes = {
+const screen = {
     width: 800,
     height: 600
 }
-const aspectRatio = sizes.width / sizes.height
+const aspectRatio = screen.width / screen.height
 const camera = new THREE.PerspectiveCamera(fov, aspectRatio)
 camera.position.z = 3
 
@@ -19,5 +19,5 @@ const canvas = document.getElementById("universe-canvas");
 const renderer = new THREE.WebGLRenderer({
     canvas: canvas
 })
-renderer.setSize(sizes.width, sizes.height)
+renderer.setSize(screen.width, screen.height)
 renderer.render(scene, camera)
