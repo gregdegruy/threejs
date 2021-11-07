@@ -1,18 +1,18 @@
+import * as THREE from "three";
+
 import "./style.css"
 import HelloScene from "./gl/scene"
 
+const clock = new THREE.Clock()
+
 const scene = new HelloScene()
 scene.init()
+scene.render()
 
-let previousTime = Date.now()
-
-const tick = () =>
+function tick()
 {
-    const currentTime = new Date(Date.now())
-    const frameworkNormalizationValue = currentTime - previousTime
-    previousTime = currentTime
-    console.log(`tick: ${currentTime.toUTCString()} - delta: ${frameworkNormalizationValue}`)
-    scene.render()
+    const elapsedTime = clock.getElapsedTime()
+    scene.animate(elapsedTime)
     window.requestAnimationFrame(tick)
 }
 
