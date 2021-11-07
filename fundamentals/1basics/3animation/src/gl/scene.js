@@ -1,8 +1,8 @@
 import * as THREE from "three";
 
-class Scene {
+class HelloScene {
   constructor() {
-    // this.scene = new THREE.Scene();
+    this.scene = new THREE.Scene();
 
     // this.camera = new THREE.PerspectiveCamera(
     //   45,
@@ -21,7 +21,6 @@ class Scene {
   }
 
   init() {
-    const scene = new THREE.Scene()
     const geometry = new THREE.BoxGeometry(1,1,1)
     const blueMaterial = new THREE.MeshBasicMaterial({ color: 0x00aaff})
     const blueCube = new THREE.Mesh(geometry, blueMaterial)
@@ -38,7 +37,6 @@ class Scene {
 
     const axesLength = 4
     const axesHelper = new THREE.AxesHelper(axesLength);
-    // camera.lookAt(axesHelper.position)
 
     const group = new THREE.Group()
     const redCube = new THREE.Mesh(
@@ -57,16 +55,16 @@ class Scene {
     group.position.x = 1.5
     group.rotation.z = 0.4
 
-    scene.add(blueCube)
-    scene.add(camera)
-    scene.add(axesHelper)
-    scene.add(group)
+    this.scene.add(blueCube)
+    this.scene.add(camera)
+    this.scene.add(axesHelper)
+    this.scene.add(group)
     const canvas = document.getElementById("universe-canvas");
     const renderer = new THREE.WebGLRenderer({
         canvas: canvas
     })
     renderer.setSize(screen.width, screen.height)
-    renderer.render(scene, camera)
+    renderer.render(this.scene, camera)
   }
 
   createMesh() {
@@ -79,4 +77,4 @@ class Scene {
   }
 }
 
-export default Scene;
+export default HelloScene;

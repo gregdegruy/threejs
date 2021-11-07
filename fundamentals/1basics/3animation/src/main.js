@@ -1,5 +1,5 @@
 import "./style.css"
-import Scene from "./gl/scene";
+import HelloScene from "./gl/scene";
 
-const scene = new Scene();
+const scene = new HelloScene();
 scene.init();
