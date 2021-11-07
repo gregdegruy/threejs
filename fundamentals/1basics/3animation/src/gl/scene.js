@@ -10,7 +10,7 @@ const aspectRatio = screen.width / screen.height
 class HelloScene {
   constructor() {
     this.scene = new THREE.Scene()
-    this.camera
+    this.group = new THREE.Group()
   }
 
   init() {
@@ -25,7 +25,6 @@ class HelloScene {
     const axesLength = 4
     const axesHelper = new THREE.AxesHelper(axesLength);
 
-    const group = new THREE.Group()
     const redCube = new THREE.Mesh(
         geometry,
         new THREE.MeshBasicMaterial({ color: 0xff6961 })
@@ -37,23 +36,20 @@ class HelloScene {
     )
     greenCube.scale.set(0.7, 0.7, 0.7)
     greenCube.position.z = 1
-    group.add(redCube)
-    group.add(greenCube)
-    group.position.x = 1.5
-    group.rotation.z = 0.4
+    this.group.add(redCube)
+    this.group.add(greenCube)
+    this.group.position.x = 1.5
+    this.group.rotation.z = 0.4
 
     this.scene.add(blueCube)
     this.scene.add(this.camera)
     this.scene.add(axesHelper)
-    this.scene.add(group)
+    this.scene.add(this.group)
   }
-
-  createMesh() {
-
-  }
-
-
+ 
   render() {
+    this.group.position.x += 0.005
+    this.group.rotation.z += 0.05
     const canvas = document.getElementById("universe-canvas");
     const renderer = new THREE.WebGLRenderer({
         canvas: canvas
