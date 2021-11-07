@@ -3,3 +3,4 @@ import HelloScene from "./gl/scene";
 
 const scene = new HelloScene();
 scene.init();
+scene.render();
