@@ -12,7 +12,8 @@ scene.render()
 function tick()
 {
     const elapsedTime = clock.getElapsedTime()
-    scene.animate(elapsedTime)
+    scene.animateCubes(elapsedTime)
+    // scene.animateCam(elapsedTime)
     window.requestAnimationFrame(tick)
 }
 

@@ -57,12 +57,21 @@ class HelloScene {
     renderer.render(this.scene, this.camera)
   }
 
-  animate(elapsedTime) {
+  animateCubes(elapsedTime) {
     this.redGreenGroup.rotation.y = elapsedTime * Math.PI * 0.02
     this.redGreenGroup.rotation.z = elapsedTime * Math.PI * 1.2
     this.blueCube.rotation.z = Math.cos(elapsedTime * Math.PI * 0.2)
     this.camera.position.x = Math.cos(elapsedTime * Math.PI * 0.2)
     this.camera.position.y = Math.sin(elapsedTime * Math.PI * 0.2)
+    this.render()
+  }
+
+  // broken :(
+  animateCam(elapsedTime) {
+    this.redGreenGroup.rotation.y = elapsedTime * Math.PI * 0.02
+    this.redGreenGroup.rotation.z = elapsedTime * Math.PI * 1.2
+    this.blueCube.rotation.z = Math.cos(elapsedTime * Math.PI * 0.2)
+    this.camera.lookAt(this.redGreenGroup.position)
     this.render()
   }
 }

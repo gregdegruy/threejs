@@ -27,4 +27,4 @@ Common *Watchpack Error (initial scan): Error: EACCES: permission denied* [issue
 
 ## Animation
 
-Animation must play the same regardless of FPS, `requestAnimationFrame(callback: FrameRequestCallback): number` does just that! Trig functions `sin`. `cos` etc. can be used to 
+Animation must play the same regardless of FPS, `requestAnimationFrame(callback: FrameRequestCallback): number` does just that! Trig functions `sin`. `cos` etc. can be used to keep animations in the bounds of the scene. Do not use getDelta on `clock` method.
