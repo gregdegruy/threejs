@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import gsap from "gsap"
 
 const fov = 75
 const screen = {
@@ -63,6 +64,11 @@ class HelloScene {
     this.blueCube.rotation.z = Math.cos(elapsedTime * Math.PI * 0.2)
     this.camera.position.x = Math.cos(elapsedTime * Math.PI * 0.2)
     this.camera.position.y = Math.sin(elapsedTime * Math.PI * 0.2)
+    this.render()
+  }
+
+  animateCubesWithGSAP() {
+    gsap.to(this.redGreenGroup.position, { duration: 1, delay: 1, x: 2})
     this.render()
   }
 
