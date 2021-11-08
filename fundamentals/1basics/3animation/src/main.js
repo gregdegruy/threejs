@@ -14,7 +14,7 @@ function tick()
     const elapsedTime = clock.getElapsedTime()
     scene.animateCubes(elapsedTime)
     // scene.animateCam(elapsedTime)
-    scene.animateCubesWithGSAP()
+    // scene.animateCubesWithGSAP()
     window.requestAnimationFrame(tick)
 }
 
