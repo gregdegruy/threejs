@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
 const fov = 75
 const screen = {
@@ -16,8 +17,15 @@ class CoolCamScene {
     this.scene = new THREE.Scene()
     
     this.cubeGeometry = new THREE.BoxGeometry(1,1,1)
-    const blueMaterial = new THREE.MeshBasicMaterial({ color: 0x00aaff})
+    const blueMaterial = new THREE.MeshBasicMaterial({ 
+      color: 0x00aaff
+    })
     this.blueCube = new THREE.Mesh(this.cubeGeometry, blueMaterial)
+    const blueWireframeMaterial = new THREE.MeshBasicMaterial({ 
+      color: 0x000000,
+      wireframe: true
+    })
+    this.blueWireframe = new THREE.Mesh(this.cubeGeometry, blueWireframeMaterial)
   }
   
   init(camType) {    
@@ -31,23 +39,25 @@ class CoolCamScene {
       default:
         this.camera = new THREE.PerspectiveCamera(fov, aspectRatio)
     }     
-    this.camera.position.z = 8
+    this.camera.position.z = 4
     
     const axesLength = 4
     const axesHelper = new THREE.AxesHelper(axesLength);
 
     this.scene.add(this.blueCube)
+    this.scene.add(this.blueWireframe)
     this.scene.add(this.camera)
     this.scene.add(axesHelper)
 
     window.addEventListener('mousemove', (event) => {
       cursor.x = event.clientX / screen.width - 0.5
-      cursor.y = event.clientY / screen.height - 0.5
+      cursor.y = (event.clientY / screen.height - 0.5) * -1
     })
   }
  
   render() {
     const canvas = document.getElementById("universe-canvas");
+    const controls = new OrbitControls(this.camera, canvas)
     const renderer = new THREE.WebGLRenderer({
         canvas: canvas
     })
@@ -56,9 +66,19 @@ class CoolCamScene {
   }
 
   animateCubes(elapsedTime) {
-    this.blueCube.rotation.y = elapsedTime
-    this.camera.position.x = cursor.x * -1
-    this.camera.position.y = cursor.y
+    let amplitude = 5
+    this.camera.position.x = cursor.x * amplitude
+    this.camera.position.y = cursor.y * amplitude
+    this.camera.lookAt(this.blueCube.position)
+    this.render()
+  }
+
+  animateCubesFullRevolution(elapsedTime) {
+    let fullRotation = Math.PI * 2
+    this.camera.position.x = Math.sin(cursor.x * fullRotation)
+    this.camera.position.z = Math.cos(cursor.x * fullRotation)
+    this.camera.position.y = cursor.y * 5
+    this.camera.lookAt(this.blueCube.position)
     this.render()
   }
 }

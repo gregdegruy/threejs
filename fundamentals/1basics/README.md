@@ -36,4 +36,4 @@ ThreeJS has all sorts of cams to support different perspective, 3D for VR (putti
 
 Z Fighting https://twitter.com/Snapman_I_Am/status/800567120765616128
 
-
+The amplitude factor in trig is useful when trying to go beyond the bounds of 1 and -1 in sin and cos. 
