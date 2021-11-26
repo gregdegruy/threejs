@@ -6,7 +6,7 @@ import CoolCamScene from "./gl/scene"
 const clock = new THREE.Clock()
 
 const scene = new CoolCamScene()
-scene.init()
+scene.init("orthographic")
 scene.render()
 
 function tick()

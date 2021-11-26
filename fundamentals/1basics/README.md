@@ -30,3 +30,10 @@ Common *Watchpack Error (initial scan): Error: EACCES: permission denied* [issue
 Animation must play the same regardless of FPS, `requestAnimationFrame(callback: FrameRequestCallback): number` does just that! Trig functions `sin`. `cos` etc. can be used to keep animations in the bounds of the scene. Do not use getDelta on `clock` method.
 
 `GSAP` is a node module that can also be used to implement animations on your meshes.
+
+# Cameras
+ThreeJS has all sorts of cams to support different perspective, 3D for VR (putting one render in one eye and another render in another) called stereo cams, split screen called array cam and more. Field of View is in degrees :O.
+
+Z Fighting https://twitter.com/Snapman_I_Am/status/800567120765616128
+
+

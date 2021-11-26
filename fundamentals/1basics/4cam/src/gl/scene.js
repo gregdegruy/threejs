@@ -1,5 +1,4 @@
 import * as THREE from "three";
-import gsap from "gsap"
 
 const fov = 75
 const screen = {
@@ -15,13 +14,21 @@ class CoolCamScene {
     this.cubeGeometry = new THREE.BoxGeometry(1,1,1)
     const blueMaterial = new THREE.MeshBasicMaterial({ color: 0x00aaff})
     this.blueCube = new THREE.Mesh(this.cubeGeometry, blueMaterial)
+    this.blueCube.rotation.y = 3
   }
   
-  init() {
-    this.blueCube.position.set(-2, -1, -0.5)
-    
-    this.camera = new THREE.PerspectiveCamera(fov, aspectRatio)
-    this.camera.position.set(0.5, 0.5, 3.5)
+  init(camType) {    
+    switch(camType) {
+      case "perspective":
+        this.camera = new THREE.PerspectiveCamera(120, aspectRatio)
+        break;
+      case "orthographic":
+        this.camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 100)
+        break;
+      default:
+        this.camera = new THREE.PerspectiveCamera(120, aspectRatio)
+    } 
+    this.camera.position.set(0, 0, 6)
     
     const axesLength = 4
     const axesHelper = new THREE.AxesHelper(axesLength);
@@ -41,14 +48,6 @@ class CoolCamScene {
   }
 
   animateCubes(elapsedTime) {
-    this.blueCube.rotation.z = Math.cos(elapsedTime * Math.PI * 0.2)
-    this.camera.position.x = Math.cos(elapsedTime * Math.PI * 0.2)
-    this.camera.position.y = Math.sin(elapsedTime * Math.PI * 0.2)
-    this.render()
-  }
-
-  animateCubesWithGSAP() {
-    gsap.to(this.redGreenGroup.position, { duration: 1, delay: 1, x: 2})
     this.render()
   }
 }
