@@ -23,7 +23,7 @@ class CoolCamScene {
         this.camera = new THREE.PerspectiveCamera(120, aspectRatio)
         break;
       case "orthographic":
-        this.camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 100)
+        this.camera = new THREE.OrthographicCamera(-1 * aspectRatio, 1 * aspectRatio, 1, -1, 0.1, 100)
         break;
       default:
         this.camera = new THREE.PerspectiveCamera(120, aspectRatio)
