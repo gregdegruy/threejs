@@ -1,6 +1,8 @@
 import * as THREE from "three";
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
+const canvas = document.getElementById("universe-canvas")
+
 const fov = 75
 const screen = {
     width: 800,
@@ -56,8 +58,6 @@ class CoolCamScene {
   }
  
   render() {
-    const canvas = document.getElementById("universe-canvas");
-    const controls = new OrbitControls(this.camera, canvas)
     const renderer = new THREE.WebGLRenderer({
         canvas: canvas
     })
@@ -79,6 +79,13 @@ class CoolCamScene {
     this.camera.position.z = Math.cos(cursor.x * fullRotation)
     this.camera.position.y = cursor.y * 5
     this.camera.lookAt(this.blueCube.position)
+    this.render()
+  }
+
+  animateCubesWithOrbitControls(elapsedTime) {
+    const controls = new OrbitControls(this.camera, canvas)
+    controls.enableDamping = true
+    controls.update()
     this.render()
   }
 }

@@ -14,6 +14,7 @@ function tick()
     const elapsedTime = clock.getElapsedTime()
     // scene.animateCubes(elapsedTime)
     // scene.animateCubesFullRevolution(elapsedTime)
+    scene.animateCubesWithOrbitControls(elapsedTime)
     window.requestAnimationFrame(tick)
 }
 
